@@ -1,0 +1,413 @@
+
+<!-- Bootstrap CSS local -->
+<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Bootstrap JS local -->
+<script src="libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<style>
+    /* Compactar el formulario y mejorar apariencia */
+    #ptiForm {
+        max-width: 400px;
+        border: 1px solid #ddd;
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Limitar tamaño de los selects e inputs */
+    .form-select, .form-control {
+        max-width: 80%;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    /* Área ZPL scrollable */
+    #zplArea {
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        resize: none;
+        font-family: monospace;
+        font-size: 0.85rem;
+        background: #f4f4f4;
+    }
+
+    /* Ajuste visual del canvas */
+    #labelCanvas {
+        width: 400px; /* vista más pequeña en pantalla */
+        height: 200px;
+        border: 1px solid #bbb;
+        background: white;
+        box-shadow: 0 0 4px rgba(0,0,0,0.2);
+    }
+
+    /* 🎨 Ajustes visuales para margenes */
+    .card-config {
+        font-size: 0.9rem; /* letra más pequeña */
+    }
+
+    .card-config h6 {
+        text-transform: uppercase;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+    }
+
+   /* Elimina las flechitas en inputs tipo number (Chrome / Edge / Safari / Firefox) */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+    -moz-appearance: textfield; /* vendor prefix para Firefox */
+    appearance: textfield;      /* estándar moderno */
+    text-align: center;
+    }
+    
+    /* 🎚️ Estilo personalizado para el rango de oscuridad */
+    #dark {
+        -webkit-appearance: none; /* Necesario para Chrome/Edge/Safari */
+        -moz-appearance: none;    /* Necesario para Firefox */
+        appearance: none;
+        width: 100%;
+        height: 6px;
+        background: linear-gradient(to right, #0d6efd 0%, #dee2e6 0%);
+        border-radius: 4px;
+        outline: none;
+        transition: background 0.3s ease;
+    }
+
+
+    /* Quita el estilo por defecto del thumb (Chrome, Edge, Safari) */
+    #dark::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0d6efd;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    }
+
+    /* Firefox */
+    #dark::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0d6efd;
+    cursor: pointer;
+    border: none;
+    }
+
+        /* Desactiva el estilo Bootstrap en el track del rango */
+    .form-range::-webkit-slider-runnable-track {
+    background: transparent !important;
+    }
+    .form-range::-moz-range-track {
+    background: transparent !important;
+    }
+
+    .panel-control {
+    font-size: 0.9rem;
+    }
+
+    .panel-control label {
+        font-weight: 600;
+    }
+
+    .panel-control .form-range {
+        accent-color: #0d6efd; /* color del slider (azul Bootstrap) */
+    }
+
+    .panel-control small {
+        color: #6c757d;
+    }
+
+    .mt-6 {
+    margin-top: 2rem !important; /* un poco más que mt-5 (~3rem) */
+    }
+
+    .card {
+    margin-bottom: 0 !important;
+    }
+</style>
+
+<div class="container-fluid my-2 px-5">
+    <h3 class="text-center mb-4">Edición de PTI y Vista Previa de Impresión</h3>
+
+    <div class="row justify-content-center">
+        <!-- Columna izquierda: Formulario -->
+        <div class="col-md-4">
+            <form id="ptiForm">
+                <!-- Variedad-->
+                <div class="mb-2">
+                    <label class="form-label fw-semibold">Variedad:</label>
+                    <select class="form-select" id="selVariedad" required>
+                        <option value="">-- Selecciona variedad --</option>
+                        
+                    </select>
+                </div>
+
+                <!-- Lugar de Producción -->
+                <div class="mb-2">
+                    <label class="form-label fw-semibold">Lugar de Producción (LDP):</label>
+                    <select class="form-select" id="selLdp" required>
+                        <option value="">-- Selecciona LDP --</option>
+                    </select>
+                </div>
+
+                
+
+                <!-- Nº Acopio -->
+                <div class="mb-2">
+                    <label class="form-label fw-semibold">Autorización y planta (Acopio):</label>
+                    <select class="form-select" id="selAcopioPA" required>
+                        <option value="">-- Selecciona acopio --</option>
+                    </select>
+                </div>
+
+                <!-- Acopio Producer -->
+                <div class="mb-2">
+                    <label class="form-label fw-semibold">Planta de empaque:</label>
+                    <select class="form-select" id="selAcopioProd" required>
+                        <option value="">-- Selecciona acopio actual --</option>
+                    </select>
+                </div>
+
+                <!-- Fecha y Juliano -->
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label class="form-label fw-semibold">Fecha:</label>
+                        <input type="date" class="form-control" id="inpFecha" required />
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label fw-semibold">Juliano:</label>
+                        <div class="form-control bg-light text-center" id="outJuliano">---</div>
+                    </div>
+                </div>
+
+                <!-- Rancho -->
+                <div class="mb-2">
+                    <label class="form-label fw-semibold">Código de Rancho:</label>
+                    <select class="form-select" id="selRancho" required>
+                        <option value="">-- Selecciona rancho --</option>
+                    </select>
+                </div>
+
+                <!-- Copias -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Cantidad de copias:</label>
+                    <input 
+                        type="number" 
+                        class="form-control form-control-sm" 
+                        id="copias" 
+                        min="1" 
+                        value="1" 
+                        required 
+                        style="width: 80px;"
+                    />
+                </div>
+
+
+               <!-- 🎛️ Botones de control -->
+                <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                    <button type="button" id="btnPreview" class="btn btn-outline-secondary btn-sm px-4">
+                        🖼️ Preview
+                    </button>
+
+                    <button type="button" id="btnImprimir" class="btn btn-secondary btn-sm px-4">
+                        🖨️ Imprimir
+                    </button>
+                </div>
+
+                 <div class="d-flex flex-wrap justify-content-center gap-3 mt-6">
+                    <button type="button" id="btnCerrar" class="btn">
+                        ✖️ Cerrar
+                    </button>
+                </div>
+                
+            </form>
+
+            <hr />
+
+            <!-- ZPL generado -->
+            <h6 class="fw-semibold">Código ZPL generado:</h6>
+            <textarea id="zplArea" rows="8" readonly></textarea>
+        </div>
+
+        <!-- Columna derecha: Vista previa del PTI -->
+        <div class="col-md-8 d-flex flex-column align-items-center">
+            <!-- Título -->
+            <h4 class="fw-semibold mb-3 text-primary">Vista previa del PTI</h4>
+
+            <!-- Contenedor del canvas -->
+           <!-- Contenedor del canvas -->
+            <!-- Contenedor de vista previa -->
+            <div class="preview-wrapper d-flex justify-content-center mt-3">
+            <div class="preview-container shadow-sm rounded-2 bg-white border position-relative"
+                style="
+                    width: 100%;
+                    max-width: 500px; /* Escala máxima visible */
+                    aspect-ratio: 2 / 1; /* Mantiene proporción 800:400 */
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+                ">
+                
+                <canvas id="labelCanvas"
+                        width="800" height="400"
+                        style="
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                            background: #fff;
+                            border: none;
+                            border-radius: 4px;
+                            margin: 0;
+                            padding: 0;
+                            image-rendering: pixelated;
+                            object-fit: contain;
+                        ">
+                </canvas>
+            </div>
+            </div>
+
+
+
+            <!-- Descripción -->
+            <p class="text-muted text-center mb-2" style="max-width: 600px;">
+                Simulación visual de la etiqueta PTI (escala aproximada 100×50 mm).
+            </p>
+
+            <div class="row w-100 mt-2 mb-0 g-4">
+
+                <!-- Columna 1: Ajustes de impresora -->
+                <div class="col-md-6 col-lg-6 mb-0 pb-0">
+                    <div class="card border-0 shadow-sm h-100 mb-0 pb-0">
+                        <div class="d-flex gap-5 justify-content-center fw-bold mb-3">
+                            <span class="mt-3 d-block">AJUSTES DE IMPRESORA ZEBRA</span>
+                        </div>
+
+                        <div class="card p-4 border-0 card-config mb-0">
+                            <h6 class="fw-semibold text-center mb-4 text-primary"> MÁRGENES PARA ETIQUETA (mm)</h6>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="mL" class="form-label fw-semibold">Margen Izquierdo</label>
+                                    <input type="number" id="mL" class="form-control" value="0" step="1" inputmode="numeric" pattern="[0-9]*"
+                                            onfocus="if(this.value=='0') this.value='';" 
+                                            onblur="if(this.value=='') this.value='0';">
+                                </div>
+
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="mR" class="form-label fw-semibold">Margen Derecho</label>
+                                    <input type="number" id="mR" class="form-control" value="0" step="1" inputmode="numeric" pattern="[0-9]*"
+                                            onfocus="if(this.value=='0') this.value='';" 
+                                            onblur="if(this.value=='') this.value='0';">
+                                </div>
+
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="mT" class="form-label fw-semibold">Margen Superior</label>
+                                    <input type="number" id="mT" class="form-control" value="0" step="1" inputmode="numeric" pattern="[0-9]*"
+                                            onfocus="if(this.value=='0') this.value='';" 
+                                            onblur="if(this.value=='') this.value='0';">
+                                </div>
+
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="mB" class="form-label fw-semibold">Margen Inferior</label>
+                                    <input type="number" id="mB" class="form-control" value="0" step="1" inputmode="numeric" pattern="[0-9]*"
+                                            onfocus="if(this.value=='0') this.value='';" 
+                                            onblur="if(this.value=='') this.value='0';">
+                                </div>
+
+                                <div class="row align-items-center p-3 mb-0 panel-control">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <label for="dark" class="form-label fw-semibold mb-0 text-start">
+                                            OSCURIDAD (simulada)
+                                        </label>
+                                        <span id="darkValue" class="fw-bold text-primary ms-3">0</span>
+                                    </div>
+                                    <input type="range" id="dark" class="form-range mt-2" min="0" max="8" step="1" value="0">
+                                    <small class="text-muted">Solo vista previa (no cambia el driver).</small>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            <!-- Columna 2: Detección de impresora -->
+           <div class="col-md-6 col-lg-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body">
+                    <h6 class="fw-semibold text-secondary mb-4 text-center">
+                        🖨️ Detección y Selección de Impresora
+                    </h6>
+
+                    <!-- Fila 1: Detección -->
+                    <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-4">
+                        <button id="btnDetect" class="btn btn-outline-secondary btn-sm px-3">
+                        🔍 Detectar impresoras
+                        </button>
+                    </div>
+
+                    <!-- Fila 2: Lista + indicador -->
+                    <div class="d-flex align-items-center justify-content-center gap-2 mb-3 flex-wrap">
+                        <!-- Select compacto -->
+                        <select id="selPrinter" class="form-select form-select-sm text-center" style="width: 220px;">
+                            <option>No hay impresoras detectadas</option>
+                        </select>
+                        <!-- Indicador de estado -->
+                        <span id="printerIndicator" 
+                                class="rounded-circle border border-1"
+                                style="width:18px; height:18px; display:inline-block; background-color:gray;">
+                        </span>
+                    </div>
+
+
+                    <!-- Fila 3: Agregar IP manual -->
+                    <div class="input-group input-group-sm mb-3" style="max-width: 360px; margin: 0 auto;">
+                        <input id="ipInput" type="text" class="form-control"
+                            placeholder="IP:puerto (ej. 192.168.1.50:9100)">
+                        <button id="btnAddIP" class="btn btn-outline-primary">Agregar IP</button>
+                    </div>
+
+                    <!-- Estado actual -->
+                    <div id="printerStatus" class="text-center small text-muted mt-2">
+                        Impresora: <strong id="printerName" class="text-dark">No detectada</strong>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Contenedor global de notificaciones -->
+<div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
+
+
+<!--paco librerial local para texto to imagen en base 64 para zpl-->
+<script src="libs/pako.min.js"></script>
+
+<!-- Librerías locales -->
+<script src="libs/BrowserPrint-3.1.250.min.js"></script> <!-- SDK (global) -->
+
+<script type="module" src="./app.js"></script>
+
+<script type="module" src="zebra-detector.js"></script>
+
+<script type="module" src="libs/ColorSlicer.js"></script>
+
+<script type="module" src="zpl/js/utils.js"></script>
+

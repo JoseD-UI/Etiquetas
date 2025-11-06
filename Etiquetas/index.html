@@ -1,0 +1,56 @@
+
+<doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Impresión de etiquetas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">Relación de etiquetas — Pinta convencional</div>
+    <div class="table-wrap">
+      <table id="tablaRegistros">
+        <thead>
+          <tr>
+            <th>Cliente</th><th>Destino</th><th>Consignatario</th><th>Importador</th><th>Formato</th><th>Tipo de empaque</th><th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Driscoll's</td><td>USA</td><td>Driscoll's</td><td>Driscoll's</td><td>18-oz</td><td>Convencional</td>
+            <td><button class="btn btn-primary btn-sm btn-abrir">Configurar e imprimir</button></td>
+          </tr>
+          <tr>
+            <td>Driscoll's</td><td>USA</td><td>Driscoll's</td><td>Driscoll's</td><td>18-oz</td><td>Convencional</td>
+            <td><button class="btn btn-primary btn-sm btn-abrir">Configurar e imprimir</button></td>
+          </tr>
+          <tr>
+            <td>Driscoll's</td><td>USA</td><td>Driscoll's</td><td>Driscoll's</td><td>18-oz-sweetest-batch</td><td>Convencional</td>
+            <td><button class="btn btn-primary btn-sm btn-abrir">Configurar e imprimir</button></td>
+          </tr>
+          <tr>
+            <td>Driscoll's</td><td>USA</td><td>Driscoll's</td><td>Driscoll's</td><td>11-oz-sweetest-batch</td><td>Convencional</td>
+            <td><button class="btn btn-primary btn-sm btn-abrir">Configurar e imprimir</button></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <p class="muted mt-8">Haz clic en “Configurar e imprimir”.</p>
+  </div>
+
+  
+  <script type="module"  src="app.js"></script>
+  <script src="./libs/BrowserPrint-3.1.250.min.js"></script>
+  <script src="./libs/pako.min.js"></script>
+  <script type="module" src="zpl/js/ptiLoader.js"></script>
+  <script type="module" src="zpl/js/zplGenerator.js"></script>
+  <script type="module" src="zpl/js/formProcessor.js"></script>
+  <script type="module" src="zpl/js/rulesProcessor.js"></script>
+  <script type="module" src="zpl/js/utils.js"></script>
+  <script type="module" src="zpl/js/printerManager.js"></script>
+
+</body>
+</html>

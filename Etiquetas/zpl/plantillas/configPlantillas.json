@@ -1,0 +1,274 @@
+{
+  "driscolls-china-4.4-oz": {
+    "general": {
+      "font": "Arial",
+      "fontSize": 7,
+      "spacing": 1,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 16,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 7,
+      "alineacion": "left"
+    }
+  },
+
+  "driscolls-china-4.4-oz-jumbo": {
+    "general": {
+      "font": "Arial",
+      "fontSize": 7,
+      "spacing": 1,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 16,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 7,
+      "alineacion": "left"
+    }
+  },
+
+  "driscolls-usa-11-oz-sweetest-batch": {
+    "general": {
+      "font": "Arial",
+      "fontSize": 8,
+      "spacing": 1,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 18,
+      "spacing": 1.5,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 8,
+      "alineacion": "left"
+    }
+  },
+
+  "driscolls-usa-18-oz": {
+    "general": {
+      "font": "Arial",
+      "fontSize": 8,
+      "spacing": 1,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 18,
+      "spacing": 1.5,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 8,
+      "alineacion": "left"
+    }
+  },
+
+  "driscolls-usa-18-oz-sweetest-batch": {
+    "general": {
+      "font": "Arial",
+      "fontSize": 8,
+      "spacing": 1,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 18,
+      "spacing": 1.5,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 8,
+      "alineacion": "left"
+    }
+  },
+
+  "driscoll's-usa-pinta": {
+    "general": {
+      "font": "Arial",
+      "fontSize": 8,
+      "spacing": 1,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 14,
+      "spacing": 1.5,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 8,
+      "alineacion": "left"
+    }
+  },
+
+  "peng sheng-china-4.4-oz-jumbo": {
+    "general": {
+      "font": "Calibri",
+      "fontSize": 6.5,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 30,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 11.5,
+      "alineacion": "left"
+    },
+
+    "lote": {
+      "font": "Calibri",
+      "fontSize": 6,
+      "bold": true,
+      "alineacion": "left"
+    }
+  },
+  "peng sheng-china-4.4-oz": {
+    "general": {
+      "font": "Calibri",
+      "fontSize": 6.5,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 30,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 11.5,
+      "alineacion": "left"
+    },
+
+    "lote": {
+      "font": "Calibri",
+      "fontSize": 6,
+      "bold": true,
+      "alineacion": "left"
+    }
+  },
+
+  "global berry-europa-125g": {
+    "general": {
+      "font": "Arial",
+      "fontSize": 6.5,
+      "spacing": 1,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 22,
+      "spacing": 1.5,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 8,
+      "alineacion": "left"
+    },
+    "lote": {
+      "font": "Zebra 0",
+      "fontSize": 50,
+      "fontcolor": "white",
+      "alineacion": "left"
+    }
+  },
+
+  "global berry-europa-125g-jumbo": {
+    "general": {
+      "font": "Arial",
+      "fontSize": 6.5,
+      "spacing": 1,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 18,
+      "spacing": 1.5,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 8,
+      "alineacion": "left"
+    },
+    "lote": {
+      "font": "Zebra 0",
+      "fontSize": 50,
+      "fontcolor": "white",
+      "alineacion": "left"
+    }
+  },
+
+  "global berry-europa-250g": {
+    "general": {
+      "font": "Arial",
+      "fontSize": 6,
+      "spacing": 1,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 28,
+      "spacing": 1.5,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 8,
+      "alineacion": "left"
+    },
+    "lote": {
+      "font": "Zebra 0",
+      "fontSize": 50,
+      "fontcolor": "white",
+      "alineacion": "left"
+    }
+  },
+
+  "global berry-europa-300g": {
+    "general": {
+      "font": "Arial",
+      "fontSize": 6,
+      "spacing": 1,
+      "alineacion": "left"
+    },
+    "variedadCode": {
+      "font": "Arial Black",
+      "fontSize": 28,
+      "spacing": 1.5,
+      "alineacion": "left"
+    },
+    "fecha": {
+      "font": "Arial",
+      "fontSize": 8,
+      "alineacion": "left"
+    },
+    "lote": {
+      "font": "Zebra 0",
+      "fontSize": 50,
+      "fontcolor": "white",
+      "alineacion": "left"
+    }
+  }
+
+}
+
